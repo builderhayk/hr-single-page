@@ -13,14 +13,7 @@ const cors = require("cors");
 app.prepare().then(() => {
   const server = express()
   
-  server.use(cors({
-    origin: 'https://hr-page-example.herokuapp.com',
-        credentials: true,
-        allowedHeaders: [
-      'Content-Type',
-      'Authorization'
-    ]
-  }));
+  server.use(cors('*'));
   server.use(bodyParser.urlencoded({ extended: true }));
   server.use(bodyParser.json());
   server.use("/files", fileRoutes);
