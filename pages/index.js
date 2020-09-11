@@ -4,7 +4,7 @@ import {Table, Input, DatePicker, TimePicker, Button} from 'antd';
 import moment from 'moment';
 import converter, {convertArrayToCSV} from "convert-array-to-csv"
 import "./style.css"
-
+let baseUrl = 'https://hr-page-axample.herokuapp.com'
 const DownloadFile = (data, fileName) => {
     const url = window.URL.createObjectURL(new Blob([data]));
     const link = document.createElement("a");
@@ -23,7 +23,7 @@ export default function Home() {
     const handleFileLoad = async (file) => {
         const fd = new FormData();
         fd.append("file", file);
-        const result = await axios.post(`/files/upload`, fd);
+        const result = await axios.post(`${baseUrl}/files/upload`, fd);
         if (result.data?.result.length) {
             setData([...result.data.result])
         }
@@ -31,7 +31,7 @@ export default function Home() {
 
     const saveData = async () => {
         if (data.length) {
-            const result = await axios.post(`/files/calculate`, {data: [...data]});
+            const result = await axios.post(`${baseUrl}/files/calculate`, {data: [...data]});
             setCalculatedData(result.data.result)
         }
     }
