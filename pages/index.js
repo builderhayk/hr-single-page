@@ -4,7 +4,7 @@ import {Table, Input, DatePicker, TimePicker, Button} from 'antd';
 import moment from 'moment';
 import converter, {convertArrayToCSV} from "convert-array-to-csv"
 import "./style.css"
-let baseUrl = 'https://hr-page-axample.herokuapp.com'
+let baseUrl = 'https://hr-page-example.herokuapp.com'
 const DownloadFile = (data, fileName) => {
     const url = window.URL.createObjectURL(new Blob([data]));
     const link = document.createElement("a");
