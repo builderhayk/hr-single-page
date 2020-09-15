@@ -8,7 +8,7 @@ const moment = require('moment');
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'tmp/csv/');
+        cb(null, 'public/csv/');
     },
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}_${file.originalname}`);
