@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, Input, DatePicker, TimePicker, Button } from "antd";
 import moment from "moment";
-import converter, { convertArrayToCSV } from "convert-array-to-csv";
+import { convertArrayToCSV } from "convert-array-to-csv";
 import "./style.css";
-
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://hr-page-example.herokuapp.com' : 'http://localhost:3000';
+console.log(baseUrl, 'baseUrl')
 const DownloadFile = (data, fileName) => {
   const url = window.URL.createObjectURL(new Blob([data]));
   const link = document.createElement("a");
@@ -25,7 +26,7 @@ export default function Home() {
     const fd = new FormData();
     fd.append("file", file);
     fd.append("ids", ids);
-    const result = await axios.post(`http://localhost:3000/files/upload`, fd);
+    const result = await axios.post(`${baseUrl}/files/upload`, fd);
     if (result.data?.result.length) {
       setData([...result.data.result]);
     }
@@ -33,7 +34,7 @@ export default function Home() {
 
   const saveData = async () => {
     if (data.length) {
-      const result = await axios.post(`http://localhost:3000/files/calculate`, {
+      const result = await axios.post(`${baseUrl}/files/calculate`, {
         data: [...data],
       });
       setCalculatedData(result.data.result);
