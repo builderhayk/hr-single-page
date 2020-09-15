@@ -1,7 +1,7 @@
 const express = require('express');
 const next = require('next');
 
-const PORT = process.env.PORT || 3000;
+const port = 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -13,7 +13,7 @@ const cors = require("cors");
 app.prepare().then(() => {
   const server = express()
   
-  server.use(cors('*'));
+  server.use(cors("*"));
   server.use(bodyParser.urlencoded({ extended: true }));
   server.use(bodyParser.json());
   server.use("/files", fileRoutes);
@@ -21,8 +21,8 @@ app.prepare().then(() => {
     return handle(req, res)
   })
 
-  server.listen(PORT, (err) => {
+  server.listen(port, (err) => {
     if (err) throw err
-    console.log(`> Ready on http://localhost:${PORT}`)
+    console.log(`> Ready on http://localhost:${port}`)
   })
 });
