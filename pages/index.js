@@ -52,11 +52,14 @@ export default function Home() {
       dateInputValue: moment().format("YYYY-MM-DD"),
       timeInputValue: moment().format("HH:mm:ss"),
     };
+    if(index + inc + 1 === 0){
+      setData([newData,...data])
+    } else {
     setData([
       ...data.slice(0, index + inc + 1),
       newData,
       ...data.slice(index + inc + 1),
-    ]);
+    ]);}
   }
 
   const del = (idx) => {
@@ -177,7 +180,7 @@ export default function Home() {
           data[i] &&
           data[i].id &&
           data[i + 1] &&
-          data[i - 1] &&
+          // data[i - 1] &&
           data[i + 1].id &&
           data[i].attendanceCheckPoint &&
           data[i + 1].attendanceCheckPoint
@@ -191,12 +194,12 @@ export default function Home() {
             (data[i].id !== data[i + 1].id &&
               data[i].attendanceCheckPoint !==
                 "Exit_Exit_Entrance Card Reader1") ||
-            (data[i].id !== data[i - 1].id &&
+            (data[i].id !== data[i - 1]?.id &&
               data[i].attendanceCheckPoint !==
                 "Entrance_Entrance_Entrance Card Reader1")
           ) {
             if (
-              data[i].id !== data[i - 1].id &&
+              data[i].id !== data[i - 1]?.id &&
               data[i].attendanceCheckPoint !==
                 "Entrance_Entrance_Entrance Card Reader1"
             ) {
@@ -271,7 +274,7 @@ export default function Home() {
               data[index] &&
               data[index].id &&
               data[index + 1] &&
-              data[index - 1] &&
+              // data[index - 1] &&
               data[index + 1].id &&
               data[index].attendanceCheckPoint &&
               data[index + 1].attendanceCheckPoint
@@ -280,13 +283,13 @@ export default function Home() {
                 (data[index].id === data[index + 1].id &&
                   data[index].attendanceCheckPoint ===
                     data[index + 1].attendanceCheckPoint) ||
-                (data[index].id === data[index - 1].id &&
+                (data[index].id === data[index - 1]?.id &&
                   data[index].attendanceCheckPoint ===
                     data[index - 1].attendanceCheckPoint) ||
                 (data[index].id !== data[index + 1].id &&
                   data[index].attendanceCheckPoint !==
                     "Exit_Exit_Entrance Card Reader1") ||
-                (data[index].id !== data[index - 1].id &&
+                (data[index].id !== data[index - 1]?.id &&
                   data[index].attendanceCheckPoint !==
                     "Entrance_Entrance_Entrance Card Reader1")
               ) {
