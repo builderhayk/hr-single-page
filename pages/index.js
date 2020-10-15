@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Table, Input, DatePicker, TimePicker, Button } from "antd";
 import moment from "moment";
@@ -176,7 +176,18 @@ export default function Home() {
       dataIndex: "actions",
       key: "actions",
       render: (_, idx, i) => {
-        if (
+        if (lastIndex === i && !data[i + 1] && data[i].attendanceCheckPoint === "Entrance_Entrance_Entrance Card Reader1") {
+          return (
+              <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                {" "}
+                <Button onClick={() => add(i, 0)}>+</Button>
+                <Button onClick={() => del(i)}>DEL</Button>
+              </div>
+          );
+        }
+        else if (
           data[i] &&
           data[i].id &&
           data[i + 1] &&
@@ -230,6 +241,8 @@ export default function Home() {
     },
   ];
 
+  const lastIndex = data.length - 1;
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -270,7 +283,10 @@ export default function Home() {
           dataSource={data}
           pagination={false}
           rowClassName={(record, index) => {
-            if (
+            if (lastIndex === index && !data[index + 1] && data[index].attendanceCheckPoint === "Entrance_Entrance_Entrance Card Reader1") {
+              return "aaa"
+            }
+            else if (
               data[index] &&
               data[index].id &&
               data[index + 1] &&

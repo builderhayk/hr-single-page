@@ -72,7 +72,7 @@ router.post("/upload", (req, res) => {
           }
         });
 
-        tempArray.sort((a, b) => a.time.localeCompare(b.time));
+        tempArray.sort((a, b) => moment(a.time).format("MM/DD/YYYY HH:mm", { trim: false }).localeCompare(moment(b.time).format("MM/DD/YYYY HH:mm", { trim: false })));
         result.push(...tempArray);
       });
 
